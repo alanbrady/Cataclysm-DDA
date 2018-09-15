@@ -1064,6 +1064,7 @@ class player : public Character
         int sleep_spot( const tripoint &p ) const;
         /** Checked each turn during "lying_down", returns true if the player falls asleep */
         bool can_sleep();
+
         /** Adds "sleep" to the player */
         void fall_asleep();
         void fall_asleep( const time_duration &duration );
@@ -1071,6 +1072,12 @@ class player : public Character
         void wake_up();
         /** Checks to see if the player is using floor items to keep warm, and return the name of one such item if so */
         std::string is_snuggling() const;
+
+    private:
+        /** last time we checked for sleep */
+        time_point last_sleep_check = calendar::time_of_cataclysm;
+
+    public:
         /** Returns a value from 1.0 to 5.0 that acts as a multiplier
          * for the time taken to perform tasks that require detail vision,
          * above 4.0 means these activities cannot be performed. */
